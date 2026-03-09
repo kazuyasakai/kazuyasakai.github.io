@@ -171,6 +171,9 @@ h1 {
 
 .btn.secondary:hover {
     background: var(--accent-soft);
+    transform: translateY(-5px); /* 他のボタンと同じ浮き上がり量 */
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.2); /* 柔らかい影を追加 */
+    border-color: var(--accent);
 }
 
 /* --- 研究の柱 (カードレイアウト) --- */
