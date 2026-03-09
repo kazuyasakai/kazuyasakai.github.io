@@ -118,16 +118,13 @@ h1 {
 .cta-buttons {
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
+    flex-wrap: wrap; /* 画面が狭い時に自動で折り返す */
 }
 
 .btn {
-    padding: 14px 28px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 700;
-    transition: all 0.3s;
-    display: inline-block;
+    min-width: 140px; /* ボタンの幅を揃えて整頓された印象に */
+    text-align: center;
 }
 
 .btn.primary {
