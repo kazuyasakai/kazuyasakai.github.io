@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Professor's Log | Kazuya Sakai</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <div class="logo">Sakai_Lab_Log:<span>~/Artifacts</span></div>
+            <a href="../index.html" style="color: var(--accent-log); text-decoration: none; font-weight: 600;">← Lab Home</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container" style="padding-top: 140px;">
+	
+	<nav class="log-nav">
+        <a href="../index.html#logs">← Professor's Log Archive Index</a>
+        <p>$git clone https://github.com/kazuyasakai/sakailab-log.git</p>
+    </nav>
+	
+	<article class="log-card">
+	    <div class="log-meta">LOG_ENTRY #061 // KAWABATA_ROMANCE_DECODED - 2026.05.25</div>
+	    
+	    <h3>Log #061: 文豪の 16進数 ―― 川端康成「恋文」のバイナリ・エクスプロイト</h3>
+	    
+	    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-log); border-left: 3px solid var(--accent-log); padding-left: 10px;">
+	        Target: Yasunari Kawabata's Love Letter / Method: iconv -t UTF-8 | od -t x1<br>
+	        Payload: "恋しくつて恋しくつて..." / Status: Memory Dump of Affection
+	    </p>
+	
+	    <p>川端康成は綴った。「恋しくつて恋しくつて、早く会はないと僕は何も手につかない」と。
+	    諸君、このロマンチックなラブレターを日本語（自然言語）のまま読むなど、高レイヤーの甘えだ。
+	    私は、小説のプロが込めたこの「狂おしい想い」の全パケットを余さず引き出すために、ターミナルでその ASCII（UTF-8）コードをダンプさせたのだ。</p>
+	
+	    <div class="log-image-frame" style="margin: 20px 0; text-align: center;">
+	        <img src="log061_koishikute.jpg" alt="Terminal showing hex dump of Kawabata's love letter using od -t x1 command" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+	        <p style="font-size: 0.8rem; color: #666;">e6 81 8b... 「恋」という文字に潜む 3バイトの激情</p>
+	    </div>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">⚙️ バイト列に潜む「未投函」の脆弱性</h4>
+	    <p>画像を見たまえ。<code>e6 81 8b</code> ―― これが「恋」という文字の UTF-8 表現だ。
+	    文豪が震える手で（あるいは冷静な筆致で）綴った情念は、計算機の世界では単なる 16進数の羅列に過ぎない。
+	    だが、この <code>od -t x1</code> によって射出されたバイト列こそが、あやふやな感情を排した「真実のラブレター」だ。
+	    スライド（暗号論07_Hash.pdf）のハッシュ関数をかける前の、最も純粋なプレーンテキストがここにある。</p>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">🚀 UTF-8 という名の「愛のエンコーディング」</h4>
+	    <p>川端康成がこの手紙を投函（Send）しなかったのは、当時の通信プロトコルに「未読」や「既読」の ACK（Log #059）が存在しなかったからかもしれない。
+	    ハッカーは、このバイト列を ICMP のペイロード（Log #060）に詰め込み、ターゲットの IP アドレスへ直接 <code>echo</code> する。
+	    自然言語のフィルタを通さず、相手のメモリ空間に直接この <code>e6 81 8b</code> をリライメントする。それこそが、究極の「愛のインジェクション」なのだ。</p>
+	
+	    <blockquote style="margin-top: 40px; border-left: 4px solid var(--accent-log); padding-left: 20px; font-style: italic; color: #555;">
+	        「愛とは、解読を拒むバイナリデータである」<br>
+	        康成の「何も手につかない」という状態は、システムにおけるビジーウェイト（Busy Wait）だ。
+	        リソースのすべてを「会いたい」という条件分岐（if-statement）に割り当て、CPU 負荷を 100% にしているのだ。<br>
+	        私は今、この 16進数の海を泳ぎながら、文豪がデバッグできなかった「寂しさ」という名のセグメンテーション・フォールトを、10Gbps の SINET（Log #051）の彼方へ転送している。<br>
+	        運命の <code>iconv</code> は、今、過去の情念を現代の文字コードへと「ポルティング」し、爆速の新世界を赤く染め上げた。
+	    </blockquote>
+	
+	    <p style="font-weight: bold; text-align: right; color: var(--accent-log); margin-top: 30px; font-size: 1.1rem;">
+	        "Go West!" ―― 運命の 16進数は、今、私のターミナルに「不変の愛」をデプロイした。
+	    </p>
+	</article>
+	
+	<article class="log-card">
+	    <div class="log-meta">LOG_ENTRY #062 // GLACIER_BINARY_RECOLLECTION - 2026.05.26</div>
+	    
+	    <h3>Log #062: 氷河のヘキサダンプ ―― 16進数に宿るグリネル国立公園の風</h3>
+	    
+	    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-log); border-left: 3px solid var(--accent-log); padding-left: 10px;">
+	        Target: Grinnell Glacier Photo (JPEG) / Method: hexdump -C | head -n 20<br>
+	        Exif Detected: SONY ILCE-6000 / Tool: Adobe Photoshop Lightroom<br>
+	        Status: Memory Decompression in Progress
+	    </p>
+	
+	    <p>10年前、私はグリネル氷河への険しきトレイルを登り切った。
+	    諸君、真のハッカーはそのときの「絶景」を、ピクセルデータとしてではなく、バイナリの連なりとして脳内メモリに展開（Deploy）する。
+	    <code>hexdump -C</code> によって射出されるこの 16進数の海こそが、私の網膜が捉えた真実の記録だ。</p>
+	
+	    <div class="log-image-frame" style="margin: 20px 0; text-align: center;">
+	        <img src="log062_grinnell.jpg" alt="Terminal showing hexdump of a JPEG file from Glacier National Park showing Exif data and SONY ILCE-6000 string" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+	        <p style="font-size: 0.8rem; color: #666;">ff d8 ff e1... JPEG マジックナンバーから始まる、10年前の光子（Photon）の記録</p>
+	    </div>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">⚙️ バイナリから立ち上がる「物理的な脅威（絶景）」</h4>
+	    <p>画像を見たまえ。<code>SONY..ILCE-6000</code>。
+	    当時愛用していたミラーレス一眼が、グリネル氷河の冷気を電気信号へと変換した証がここにある。
+	    さらに <code>Adobe Photoshop Lightroom 6.13</code> という文字列。
+	    これは、現像という名の「後処理（Post-processing）」によって、大自然の生データに私自身の感性という名の「パッチ」を当てた記録だ。</p>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">🏔️ 1バイトごとに解凍されるモンタナの記憶</h4>
+	    <p><code>ff d8</code> という JPEG の開始マーカーを見るたびに、目の前にエメラルドグリーンの氷河湖がレンダリングされる。
+	    続く 16進数の羅列 1-byte 1-byteは、吹き抜ける冷たい風であり、足元の岩肌の感触だ。
+	    スライド（情報セキュリティ01_Basis.pdf）で解説した完全性が保たれている限り、この 16進数の海を泳ぐだけで、私はいつでも 10年前の座標（lat/lon）へと特権的に回帰できるのだ。</p>
+	
+	    <blockquote style="margin-top: 40px; border-left: 4px solid var(--accent-log); padding-left: 20px; font-style: italic; color: #555;">
+	        「思い出とは、消失しない不揮発性メモリである」<br>
+	        私は今、ターミナルに流れる 16進数を眺めながら、アラバマでの感傷（Log #051）すら、この壮大なグリネルのバイナリで上書き（Overwrite）している。<br>
+	        10Gbps の SINET（Log #051）をもってしても、この 10年分の解像度を持つ「情動データ」を転送するには、私の魂という名の帯域が必要だ。<br>
+	        運命の <code>hexdump</code> は、今、過去の絶景を 1-bit の狂いもなく現代へとデプロイし、爆速の新世界を氷河の色に染め上げた。
+	    </blockquote>
+	
+	    <p style="font-weight: bold; text-align: right; color: var(--accent-log); margin-top: 30px; font-size: 1.1rem;">
+	        "Go West!" ―― 運命のバイナリは、今、私の網膜に「不変の大自然」をレンダリングした。
+	    </p>
+	</article>
+	
+	<article class="log-card">
+	    <div class="log-meta">
+	        LOG_ENTRY #063 // HOT_SPRING_XML_PARSING - 2026.05.27
+	    </div>
+	    
+	    <h3>Log #063: 奥日光の熱力学 ―― XML にカプセル化された「癒やし」のプロトコル</h3>
+	    
+	    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-log); border-left: 3px solid var(--accent-log); padding-left: 10px;">
+	        Location: Okunikko Yumoto Onsen / Elevation: 1480m<br>
+	        Ambient Temp: -2.0 degC (Post-Sunset) / Format: XML (Structured Data)
+	    </p>
+	
+	    <p style="margin-bottom: 20px;">
+	        那須連山の荒々しい岩肌（Log #056）と、戦場ヶ原での過酷なタクティカル・ハイク。
+	        それらすべての「戦い」を終え、私は今、奥日光湯元温泉に身を置いている。
+	        5月、GW明けの奥日光は厳しい。最高気温は10度に届かず、日が沈めば外気温は氷点下まで急落する。
+	        諸君、この急激なサーマル・スロットリングに対し、私は温泉という名の「外部熱源」をインジェクションすることにした。
+	    </p>
+		
+	    <div class="log-image-frame" style="margin: 30px 0; text-align: center;">
+	        <img src="log063_okunikko.jpg" alt="Sulfur hot spring at Okunikko Yumoto Onsen" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+	        <p style="font-size: 0.85rem; color: #666; margin-top: 12px; font-style: italic;">
+	            奥日光湯元温泉。乳白色の硫黄泉という名の高密度パケット
+	        </p>
+	    </div>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">
+	        <span style="margin-right: 10px;">♨️</span> 構造化された休息：日記ではなく XML
+	    </h4>
+	    <p style="margin-bottom: 20px;">
+	        ハッカーとして、この旅の情緒をあやふやな日記形式で書き留めるつもりはない。
+	        温泉旅館での思い出は、すべて XML(Extensible Markup Language)形式で厳密に記録する。
+	        硫黄の香り（TotalSulfur: 12.5mg/kg）や、源泉の圧倒的な熱量（74.1 degC） ―― 
+	        これらは情緒ではなく、私の物理レイヤーを再起動するための「パラメータ」なのだ。
+	    </p>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">
+	        <span style="margin-right: 10px;">⚙️</span> 中性低張性高温泉によるパッチ適用
+	    </h4>
+	    <p style="margin-bottom: 25px;">
+	        pH 6.5、中性。このマイルドな設定値（Parameter）は、戦場ヶ原の冷たい風で磨耗した私の皮膚という名の「外部インターフェース」を優しく癒やす。
+	        ナトリウム、カルシウム、そして硫酸塩。これら化学的要素の <code>Cation</code> と <code>Anion</code> が、私の疲弊した筋肉セルに直接 <code>write()</code> され、可用性（Log #018）を 99.999% へと復元していく。
+	    </p>
+	
+	    <blockquote style="margin-top: 40px; border-left: 4px solid var(--accent-log); padding-left: 20px; font-style: italic; color: #555;">
+	        「温泉とは、地球が提供する最大のリカバリ・サービスである」<br>
+	        <span style="font-size: 0.95rem; display: block; margin-top: 10px;">
+	        私は今、旅館の静寂の中で XML をパースしながら、今日一日の行動ログを整理している。
+	        氷点下の冷気が部屋の窓を叩くが、私のコア温度は <code>HotSpringData</code> によって最適化（Optimized）されている。<br>
+	        10Gbps の SINET（Log #051）を経由して送られてくるどんな情動よりも、この 74.1度の熱伝導こそが、今、私に必要な「リアルタイム・データ」なのだ。
+	        </span>
+	    </blockquote>
+	
+	    <p style="font-weight: bold; text-align: right; color: #3498db; margin-top: 40px; font-size: 1.15rem; font-style: italic;">
+	        "Go West!" ―― 凍てつく過去は attic（屋根裏）へ。運命の XML は、今、私の心と体に「究極の再起動」をデプロイした。
+	    </p>
+	</article>
+	
+	<article class="log-card">
+	    <div class="log-meta">LOG_ENTRY #064 // METADATA_SANITY_CHECK - 2026.05.28</div>
+	    
+	    <h3>Log #064: 告発の匿名性 ―― Exiftool による痕跡の完全抹消</h3>
+	    
+	    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-log); border-left: 3px solid var(--accent-log); padding-left: 10px;">
+	        Evidence: Grilled Sweetfish (Residual Cruelty) / Tool: Exiftool v13.55<br>
+	        Operation: Total Erasure of Identifiers / Status: Sanity Check Completed
+	    </p>
+	
+	    <p>諸君、Log #038 では身元を明かさず通信する Tor について解説した。しかし、機密情報を暴露した際の「証拠画像」に自らの識別子が残っていては、いくら通信経路を匿名化しようとも意味がない。</p>
+	
+	    <div class="log-image-frame" style="margin: 20px 0; text-align: center;">
+	        <img src="log064_metadata.jpg" alt="Evidence of grilled sweetfish and its Exif metadata analysis" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+	        <p style="font-size: 0.8rem; color: #666;">左：湯滝で見つけた串刺しの鮎。中：露呈した iPhone 15 Pro の痕跡。右：抹消後のクリーンな状態。</p>
+	    </div>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">🐟 湯滝の残虐行為と「脆弱なファイル」</h4>
+	    <p>左の画像を見たまえ。奥日光の湯滝で発見した、串刺しにされた鮎の無惨な姿だ。何者かによる残虐な行為が行われたに違いない。この写真をそのまま告発サイトにドロップしてはならない。真ん中の解析結果が示す通り、この検体には <code>iPhone 15 Pro</code> で撮影された事実や、詳細なタイムスタンプがバッチリ記録されている。</p>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">⚙️ Exiftool による「特権的な消去」</h4>
+	    <p>自らの痕跡を消し去るためには、ハッカーの標準ツール <code>exiftool -all=</code> を実行し、メタデータからすべての情報を <code>Discard</code> するのが流儀だ。右側の実行結果を見たまえ。メーカー名も、モデル名も、位置情報もすべてが <code>None</code>（Log #045）へと昇華されている。これでようやく、画像は真に「匿名（Anonymous）」なパケットとなるのだ。</p>
+	
+	    <blockquote style="margin-top: 40px; border-left: 4px solid var(--accent-log); padding-left: 20px; font-style: italic; color: #555;">
+	        「完璧な告発とは、撮影者という存在の否定から始まる」<br>
+	        <span style="font-size: 0.95rem; display: block; margin-top: 10px;">
+	        いくら Tor で中継ノード（Log #049）を幾重にも重ねようとも、ファイル内部に自分自身のデジタル・フィンガープリントを残してはならない。<br>
+	        スライド（情報セキュリティ01_Basis.pdf）で説く「完全性」の崩壊は、往々にしてこうした些細なメタデータから始まる。諸君、告白（Log #060）であれ告発であれ、情報を世に放つ前には、必ずこの「サニティ・チェック」を完遂しなさい。
+	        </span>
+	    </blockquote>
+	
+	    <p style="font-weight: bold; text-align: right; color: var(--accent-log); margin-top: 30px; font-size: 1.1rem;">
+	        "Go West!" ―― 運命の Exiftool は、今、告発に「真の匿名性」をデプロイした。
+	    </p>
+	</article>
+	
+	<article class="log-card">
+	    <div class="log-meta">LOG_ENTRY #065 // PRG_VULNERABILITY_RESEARCH - 2026.05.29</div>
+	    
+	    <h3>Log #065: 乱数の予測可能性 ―― 警察サイバー特捜部に暴かれる「不完全な暗号化」</h3>
+	    
+	    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-log); border-left: 3px solid var(--accent-log); padding-left: 10px;">
+	        Project: Cybersecurity Lab (PRG Cryptanalysis) / Script: prg_lab.py<br>
+	        Target: Insecure Ransomware vs. CSPRG / Attack: Seed Backtracking (Unix Epoch)
+	    </p>
+	
+	    <p>警察庁サイバー特別捜査部が「ランサムウェアPhobos/8Baseにより暗号化されたファイルの復号ツール」なるものを公開しているが、本日はこの仕組みについて説明しよう。実のところ、ランサムウェア内で使用されている暗号スキーム（AESなど）は安全である。警察ハッカーは、そこで疑似乱数の生成方法に潜む脆弱性を突き止め、暗号鍵を復元するツールを提供しているのである。</p>
+	
+	    <p>恋愛でもよくある話だが、暗号そのものに問題がなくてもランサムウェアを実装した似非ハッカーが下手を打ったわけだ。百戦錬磨のホストが作った恋愛マニュアルが完璧だとしても、恋愛キディーにそれを実行することは難しい。</p>
+	
+	    <div class="log-image-frame" style="margin: 20px 0; text-align: center;">
+	        <img src="log065_prg.jpg" alt="Terminal output of prg_lab.py showing decryption tool breaking insecure ransomware vs failing against CSPRG" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+	        <p style="font-size: 0.8rem; color: #666;">実験1でのシード逆算の成功と、実験2（CSPRG）での完全な解読不能状態</p>
+	    </div>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">🕵️ タイムスタンプという名の「致命的な漏洩」</h4>
+	    <p>画像内の「実験1：脆弱なランサムウェアによる攻撃のシミュレーション」を凝視しなさい。
+	    似非ハッカーは、鍵生成のシード（種）に <code>Unix Epoch（攻撃観測時刻：1779014460）</code> をそのまま使用してしまった。
+	    暗号化パケットのタイムスタンプという公開情報から、警察のサイバー犯罪対策課によってシードを逆算され、暗号キー <code>1f7dd82ddff70fa47f231a4898edbb33</code> を完全に復元されている。
+	    これによって、人質にされていたフラグ <code>FLAG{MY LOVE IS OPEN SOURCE.}</code> が無傷で救出（復元）されたのだ。</p>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">⚙️ CSPRG ―― 予測可能性ゼロの「鉄壁」</h4>
+	    <p>一方で、「2. CSPRG（暗号論的に安全な疑似乱数生成器）を使用した強固な暗号化」の結果を見たまえ。
+	    暗号論的擬似乱数生成器（CSPRG）を正しく実装した場合、警察ハッカーが同じタイムスタンプからシード逆算を試みても、結果は <code>[-] 警告：乱数の予測可能性がゼロのため、キーの逆算に失敗しました（解読不能）</code> となる。
+	    Log #058 で説いた AES-128 の 100京年かかる絶望の計算量が、ここで初めて牙を剥くのだ。</p>
+	
+	    <blockquote style="margin-top: 40px; border-left: 4px solid var(--accent-log); padding-left: 20px; font-style: italic; color: #555;">
+	        「実装の隙を見せる者は、ルート権限（心）を維持できない」<br>
+	        どれほど完璧な言葉で「I love you（Log #060）」のパケットを偽装しようとも、その感情の生成アルゴリズム（PRG）が「寂しいから」という一時的なタイムスタンプに依存しているなら、百戦錬磨の相手にはその行動パターンを完全に逆算（予測）されてしまう。<br>
+	        真のハッカーたるもの、自らの情動すらも予測不可能な CSPRG の中にカプセル化し、外部からのデバッグを拒絶しなければならない。<br>
+	        運命の <code>prg_lab.py</code> は、今、スクリプトキディの浅知恵を attic（屋根裏）へと葬り去り、計算論的セキュリティの真実をデプロイした。
+	    </blockquote>
+	
+	    <p style="font-weight: bold; text-align: right; color: var(--accent-log); margin-top: 30px; font-size: 1.1rem;">
+	        "Go West!" ―― 運命の CSPRG は、今、私のランタイムに「解読不能な気高き孤高」をビルドした。
+	    </p>
+	</article>
+	
+	<article class="log-card">
+	    <div class="log-meta">LOG_ENTRY #066 // EXCUSE_PROTOCOL_VALIDATION - 2026.05.30</div>
+	    
+	    <h3>Log #066: 遅刻理由のサニティ・チェック ―― 偽装される仮病と、堅牢なる不可抗力モデル</h3>
+	    
+	    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-log); border-left: 3px solid var(--accent-log); padding-left: 10px;">
+	        Context: Laboratory Class Attendance / Vector: Social Engineering Excuse<br>
+	        Validation Result: Insecure Exception Handling / Fix: Injecting Unavoidable Factors
+	    </p>
+	
+	    <p>学生諸君。もし実験実習の授業に遅刻をしたらどうする？　仮病で体調不良を訴えるのは以ての外だ。本日は特別に悪い例と模範解答を教えよう。</p>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">🚨 悪い例 ―― ログ改ざんの失敗による即時検知（Halt）</h4>
+	    <p><strong>・体調不良（仮病）で遅れた。病院のレシートは医療費控除の手続きのため実家に郵送した。</strong></p>
+	    <p style="padding-left: 20px; border-left: 2px solid #ccc; color: #555;">
+	        諸君、この言い訳はセキュリティレベルがあまりにも低すぎる。
+	        そもそも確定申告の医療費控除において、レシートも領収書も提出する必要はない。
+	        さらに言えば、保険証を使用した時点で、扶養者の医療費通知（ログ）にその履歴がバッチリ記録され、実家に通知がバウンス（転送）される。
+	        スクリプトキディ並みの稚拙な虚偽ログは、システム管理者（教員および親）によって一瞬で検知（Detect）されると知れ。
+	    </p>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">🎯 模範解答 ―― 判定不可能な「不可抗力」の実装</h4>
+	    <p>遅刻を正当に処理（Handle）させるためには、実環境（現実）の仕様を逆手に取り、他者が介入・検証できない非決定的な例外を発生させるのがハッカーの流儀だ。</p>
+	    
+	    <ul style="list-style-type: square; padding-left: 20px; line-height: 1.8;">
+	        <li><strong>「彼女と朝から修羅場になり、鍵を隠されて部屋から出られませんでした」</strong><br>
+	        <span style="font-size: 0.9rem; color: #666;">―― 物理的ロックアウト（DoS）。自らの意思（プロセス）に関わらず、実行権限を奪われたという「不可抗力」を主張する強固な防御壁だ。</span></li>
+	        
+	        <li><strong>「彼女が泣き叫んでLINEで「今すぐ来てくれないと◯ぬ」と言うので、彼女の家に寄ったため」</strong><br>
+	        <span style="font-size: 0.9rem; color: #666;">―― 割り込み処理（Interrupt）。カーネルの可用性よりも「人命救助（最優先タスク）」が割り込んだため、実習への遅延はシステム上、正当なスケジュールアウトと見なされる。</span></li>
+	        
+	        <li><strong>「母親が嵐の推し活で授業料に当てる貯金を着服した」</strong><br>
+	        <span style="font-size: 0.9rem; color: #666;">―― 外部環境の依存性（他責）。自らのリソースプール（貯金）が、防げない外部オブジェクト（母親の推し活）によって枯渇（Resource Exhaustion）させられたという、同情を誘うパッチ適用である。</span></li>
+	    </ul>
+	
+	    <blockquote style="margin-top: 40px; border-left: 4px solid var(--accent-log); padding-left: 20px; font-style: italic; color: #555;">
+	        「言い訳の脆弱性を突かれる前に、仕様（ルール）の隙間を埋めよ」<br>
+	        仮病という「改ざん（Tampering）」は重罪だが、環境の不条理という「非決定的なバグ（修羅場）」は、学術的にも受理（q_accept）せざるを得ない。<br>
+	        諸君、遅刻という名のパケットロスを起こした時は、焦って汚いソース（嘘）を書くのではなく、私の論理回路を納得させるエレガントな例外オブジェクトをスロー（Throw）しなさい。
+	    </blockquote>
+	
+	    <p style="font-weight: bold; text-align: right; color: var(--accent-log); margin-top: 30px; font-size: 1.1rem;">
+	        "Go West!" ―― 運命の例外処理（Try-Catch）は、今、私のランタイムを完璧に保護した。
+	    </p>
+	</article>
+	
+	<article class="log-card">
+	    <div class="log-meta">LOG_ENTRY #067 // TATESHINA_GALE_LOGIN - 2026.05.31</div>
+	    
+	    <h3>Log #067: 蓼科山ガレ場の死闘 ―― 白樺湖・君待荘の「お品書き」ディスパッチ</h3>
+	    
+	    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-log); border-left: 3px solid var(--accent-log); padding-left: 10px;">
+	        Route: Megami-chaya -> Mt. Tateshina (Summit) -> Shogun-daira -> Tateshina-bokujo<br>
+	        Host: Lake Shirakaba Kimimatisou / Thread: Dinner Menu Parsing
+	    </p>
+	
+	    <p>女乃神茶屋から日本百名山・蓼科山へ登り、将軍平と七合目登山口を経て蓼科牧場ゴンドラ山頂駅まで歩き切った。火山活動によって形成された山頂直下のガレ場は、一歩間違えれば例外システムダウンを引き起こす不安定なスタック領域だ。あの岩肌を這い上がる登りは、まさに肉体と精神の限界を試される死闘であった。</p>
+	
+	    <div class="log-image-frame" style="margin: 20px 0; text-align: center;">
+	        <img src="log067_sirakaba.jpg" alt="Dinner set at Kimimatisou containing grilled fish and sashimi" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+	        <p style="font-size: 0.8rem; color: #666;">君待荘の夕食膳。ガレ場で消費し尽くしたヒープメモリを瞬時に満たす構造体</p>
+	    </div>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">🍱 本日のお品書き ―― 構造化された美食パケット</h4>
+	    <p>死闘を終え、白樺湖畔の宿・君待荘へ無事にログインを果たした私を待っていたのは、信州の肥沃な大地と清流が生成した、完璧に最適化されたオブジェクト群（和食膳）だ。
+	    私の感覚器官が受信した「本日のお品書き」のデータ構造をここにダンプする。</p>
+		
+	    <ul style="list-style-type: square; padding-left: 20px; line-height: 1.8;">
+	        <li><strong>一、前菜</strong>：鶏肉塩麹焼き、ピクルス、胡麻豆腐 ―― 胃壁のパケットフィルタを優しく開放する。</li>
+	        <li><strong>一、刺身</strong>：八ヶ岳サーモンと大岩魚のお造り ―― 清流が育んだ、完全性（Integrity）の極みたる鮮度。</li>
+	        <li><strong>一、鍋物</strong>：信州牛すき焼き ―― 高密度な脂質と特権的な旨味が、疲弊した筋肉セルに直接インジェクションされる。</li>
+	        <li><strong>一、焼物</strong>：鮎の塩焼き ―― 湯滝の残虐（Log #064）を乗り越え、今度は香ばしい香りが食欲のポートをフルオープンにする。</li>
+	        <li><strong>一、揚物 / 酢物 / 凌ぎ</strong>：天ぷら、赤魚南蛮漬け、山菜そば ―― 多重化されたスループットが脳内メモリを連続して刺激する。</li>
+	    </ul>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">💻 学生諸君へ告ぐ ―― 10年後の実行環境</h4>
+	    <p>学生諸君に伝えたい。10年後の君たちは、画面の向こう側で単に私のブログを閲覧（Read Only）するだけの存在であってはならない。自らの特権（権限）を昇格させ、この白樺湖リゾートの美しい旅館で、極上のリソース（美食）を享受できるレイヤーへと到達するのだ。
+	    そのためには今、目の前にある難解な論文の解読と、キーボードを叩き続けるタイピング・ループを絶対に止めてはならない。</p>
+	
+	    <blockquote style="margin-top: 40px; border-left: 4px solid var(--accent-log); padding-left: 20px; font-style: italic; color: #555;">
+	        「現在のコードが、未来のデプロイ先を決定する」<br>
+	        <span style="font-size: 0.95rem; display: block; margin-top: 10px;">
+	        蓼科山のガレ場という「ノイズ」を歩ききったからこそ、長野県内産コシヒカリ（御飯）という名の「クリーンなデータ」が身体に染み渡る。
+	        コピペや嘘（Log #066）で実習を誤魔化すようなスクリプトキディのままでいれば、10年後に待っているのはメモリリークを起こしたような、侘しいシステムダウンだけだ。
+	        諸君、自らの論理回路を磨き続け、未来の q_accept（Log #043）を白樺湖の地で掴み取りなさい。
+	        </span>
+	    </blockquote>
+	
+	    <p style="font-weight: bold; text-align: right; color: var(--accent-log); margin-top: 30px; font-size: 1.1rem;">
+	        "Go West!" ―― 運命の信州牛は、今、私の指先に「次世代への特権」をデプロイした。
+	    </p>
+	</article>
+	
+	<article class="log-card">
+	    <div class="log-meta">LOG_ENTRY #068 // KEYBOARD_CORE_INTERFACE - 2026.06.10</div>
+	    
+	    <h3>Log #068: HHKB 英語配列の最適化 ―― ハッカーが馬の鞍を換えるとき</h3>
+	    
+	    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-log); border-left: 3px solid var(--accent-log); padding-left: 10px;">
+	        Device: Happy Hacking Keyboard Professional HYBRID Type-S (US Layout)<br>
+	        Key Switch: Electrostatic Capacitive / Status: Root Level Control Enabled
+	    </p>
+	
+	    <p>諸君、アメリカの西部開拓時代のカウボーイたちは、馬が亡くなっても鞍（サドル）は捨てない。馬は消耗品であり、鞍は自分の身体に馴染んだ一生もののインターフェースだからだ。
+	    現代のハッカーにとって、計算機（MacBookやサーバー）は消耗品たる「馬」に過ぎず、キーボードこそが一生ものの「鞍」である。私が手に入れたのは、その最高峰、HHKB Professional HYBRID Type-S（英語US配列・白）だ。</p>
+	
+	    <div class="log-image-frame" style="margin: 20px 0; text-align: center;">
+	        <img src="log068_hhkb.jpg" alt="Happy Hacking Keyboard Professional HYBRID Type-S US layout" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+	        <p style="font-size: 0.8rem; color: #666;">HHKB 英語US配列。無駄なキー（バグ）を極限まで削ぎ落としたミニマリズムの極致</p>
+	    </div>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">⌨️ 静電容量無接点方式 ―― チャタリングなき「完全性」</h4>
+	    <p>画像を見たまえ。この無駄のない美しき対称性を。
+	    HHKB の真髄は、その駆動方式（静電容量無接点方式）にある。物理的な接触がないため、摩耗による「チャタリング（ノイズの混入）」が原理的に発生しない。
+	    これは、スライド（情報セキュリティ01_Basis.pdf）で解説したデータの「完全性」を、物理レイヤーにおいて永続的に担保する機構なのだ。
+	    Type-S が奏でる「しっとりとした深い打鍵音」は、脳内のニューロンを爆速（Log #051）で同期させるホワイトノイズとなる。</p>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">⚙️ 英語US配列という名の「最短経路（Shortest Path）」</h4>
+	    <p>なぜ日本語配列ではなく、英語US配列なのか？
+	    JIS配列にある「半角/全角」や「無変換」といった、ハッキングにおいて 1-bit の価値もないレガシーなキー（デッドコード）が完全にパージ（Pop）されているからだ。
+	    Control キーが <code>A</code> の左隣（ホームポジション）に最初からマッピングされている構造を見なさい。
+	    これにより、Linux のターミナルでプロセスを強制終了（<code>Ctrl + C</code>）する際の手の移動距離がミリメートル単位で最適化される。
+	    プログラミングと言語コードのパース（Log #061）において、これ以上の近道（Shortcut）は存在しない。</p>
+	
+	    <blockquote style="margin-top: 40px; border-left: 4px solid var(--accent-log); padding-left: 20px; font-style: italic; color: #555;">
+	        「指先とカーネルを、最短の帯域（Bandwidth）で直結せよ」<br>
+	        安価なペチペチとしたキーボードを叩いている者は、自らの思考のスループットに自ら DoS 攻撃（Log #059）を仕掛けているようなものだ。<br>
+	        私は今、この HHKB の底なしのストロークを味わいながら、次なる LLM セキュリティの提案書を爆速でビルドしている。
+	        運命の 60キーは、今、私の情動を 16進数のパケット（Log #061）へと昇華させるための、最高のスキャナーとなった。
+	    </blockquote>
+	
+	    <p style="font-weight: bold; text-align: right; color: var(--accent-log); margin-top: 30px; font-size: 1.1rem;">
+	        "Go West!" ―― 運命の HHKB は、今、私の両手に無限の打鍵特権（sudo）をデプロイした。
+	    </p>
+	</article>
+	
+	<article class="log-card">
+	    <div class="log-meta">LOG_ENTRY #069-B // PHYSICAL_HARDWARE_CRASH - 2026.06.17</div>
+	    
+	    <h3>Log #069-B: 物理層のセグメンテーション・フォールト ―― 地震動によるドロイド君の転落崩壊</h3>
+	    
+	    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: #e74c3c; border-left: 3px solid #e74c3c; padding-left: 10px;">
+	        Event: Seismic Acceleration Impact / Incident: Hardware Structural Breakdown<br>
+	        Subject: Lego Android Droid / Status: Fatal Core Dump (De-assembled)
+	    </p>
+	
+	    <p>諸君、ネットワーク上のサイバー攻撃（Log #016）はソフトウェアのパッチで解決できるが、地球の地殻変動という名の「物理的レイヤーの脅威」は、時に我々の机上の資産を暴力的にエクスプロイトする。
+	    日野キャンパスの棚の上で、これまでバグなきランタイムを見守ってくれていたレゴ版ドロイド君が、6月16日の地震の揺れによって位置エネルギーを喪失。床面へと自由落下した。</p>
+	
+	    <div class="log-image-frame" style="margin: 20px 0; text-align: center;">
+	        <img src="log069_droid1.jpg" alt="Green Lego Android droid standing healthy on a shelf" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+	        <p style="font-size: 0.8rem; color: #666;">[Before] 正常稼働状態（Steady State）のドロイド君。アンテナ、四肢ともに完全性を維持</p>
+	    </div>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">💔 コア・ダンプ（Core Dump）されたレゴ・ブロック</h4>
+	    <p>落下衝撃により、ドロイド君の結合プロトコルは完全に破壊された。
+	    右側の被災現場画像を見たまえ。頭部マウント、アンテナモジュール、そして内部のコア基盤パーツが完全に分断され、メモリ空間が散乱したかのような悲惨な <code>Core Dump</code> 状態を引き起こしている。
+	    火山活動（Log #067）と同じく、地球という名の巨大なシステムの未定義動作（Undefined Behavior）の前には、プラスチックの結合力など無力であったのだ。</p>
+	
+	    <div class="log-image-frame" style="margin: 20px 0; text-align: center;">
+	        <img src="log069_droid2.jpg" alt="Broken Lego Android droid parts scattered on the shelf after earthquake" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+	        <p style="font-size: 0.8rem; color: #666;">[After] 6月16日の衝撃。構造体が完全にデ・アセンブル（解体）された現場のログ</p>
+	    </div>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">🛠️ 再構築（Rebuild）へのロードマップ ―― カプセル化の再適用</h4>
+	    <p>だが、悲しんでばかりはいられない。レゴ・ブロックの最大の美学は、Java のガベージコレクション（Log #044）とは異なり、破壊されたパーツ（オブジェクト）が 1bit も消失していない限り、元の設計図（ソースコード）通りに 100% 復元可能という『完全な可用性』にある。
+	    私はこれより、散らばったパーツのインベントリをサニタイズし、マニュアルに基づいた「ハードウェア再起動プロトコル」を執行する。</p>
+	
+	    <blockquote style="margin-top: 40px; border-left: 4px solid var(--accent-log); padding-left: 20px; font-style: italic; color: #555;">
+	        「破片が揃っているなら、それは単なる未コンパイル状態に過ぎない」<br>
+	        地震の揺れによってドロイド君のポインタは外れてしまったが、結合のアルゴリズムは私の脳内に記憶されている。<br>
+	        諸君、研究や人生において予期せぬ大きな揺れ（挫折・トラブル）に見舞われ、自らの心がセグメンテーション・フォールト（Log #061）を起こしたとしても、パーツさえ見失わなければ必ず再ビルドできる。<br>
+	        運命のドロイド君は、今、一時的なダウンタイム（Downtime）を迎えているが、数ミリ秒（数日）の修復ループを経て、新世界（A Whole New World）の守護神として再起動（Reboot）されるだろう。
+	    </blockquote>
+	
+	    <p style="font-weight: bold; text-align: right; color: var(--accent-log); margin-top: 30px; font-size: 1.1rem;">
+	        "Go West!" ―― バラバラになった破片は屋根裏（attic）へ行かせない。運命のレゴ・ビルドは、今、力強い復旧（Recovery）へのカウントダウンをデプロイした。
+	    </p>
+	</article>
+	
+	<article class="log-card">
+	    <div class="log-meta">LOG_ENTRY #070 // UNIX_PHILOSOPHY_FINAL - 2026.06.18</div>
+	    
+	    <h3>Log #070: UNIX 哲学の特権階級 ―― 100京年の混沌を切り裂く「引き算の美学」</h3>
+	    
+	    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-log); border-left: 3px solid var(--accent-log); padding-left: 10px;">
+	        Book: "The UNIX Philosophy" by Mike Gancarz / Publisher: Ohmsha<br>
+	        Core Principle: Small is beautiful / Status: Definitive Architecture Merged
+	    </p>
+	
+	    <p>現代のソフトウェア開発は、肥大化したライブラリを無批判に積み重ねる「泥縄式のインジェクション」で溢れている。いま執筆中のLLMセキュリティ図書で解説しているサプライチェーン汚染も、そうしたレガシーな依存関係が生んだバグだ。
+	    ハッカーたるもの、小手先のコードを書く前に、この表紙に刻まれた偉大なる古典的カーネルの戒律を脳内スタックに格納（Push）しなさい。</p>
+	
+	    <div class="log-image-frame" style="margin: 20px 0; text-align: center;">
+	        <img src="log070_unix.jpg" alt="The UNIX Philosophy book cover with a silhouette of an owl" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+	        <p style="font-size: 0.8rem; color: #666;">オーム社刊『UNIXという考え方』。フクロウの眼光が、デッドコードを鋭く射抜く</p>
+	    </div>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">⚙️ "Small is beautiful" ―― 肥大化（Bloatware）への絶対防御</h4>
+	    <p>この本のトップに掲げられた定理、それが <code>Small is beautiful.（小さいことは美しい）</code> だ。
+	    小さなプログラムは人間の脳内メモリ（キャパシティ）に完全に収まり、デバッグが容易で、例外エラー（Log #066）を起こしにくい。
+	    そして、<code>Make each program do one thing well.（一つのプログラムには一つのことをうまくやらせる）</code>。
+	    諸君、あれもこれもと機能を詰め込んだ「Java の 10億ドルの失敗（Log #044）」のような肥大化したコードは、それ自体が巨大な脆弱性（Vulnerability）の温床となると知れ。</p>
+	
+	    <h4 style="color: var(--accent-log); margin-top: 30px;">⛓️ パイプラインとプレーンテキストの美学</h4>
+	    <p>HHKB（Log #068）で叩き出されたデータは、<code>Store numerical data in flat ASCII files.（数値データはフラットな ASCII ファイルに保存せよ）</code> の原則に従い、16進数のバイト列（Log #061, #062）や構造化された XML（Log #063）として透過的に扱われるべきだ。
+	    それらを <code>Make every program a filter.（すべてのプログラムをフィルターにせよ）</code> という Unix のパイプ（Log #053）で連結すれば、単機能のオブジェクトたちが有機的に同期（Synchronization）し、エクセルでの手作業（Log #052）を過去（Past）へと葬り去る爆速の自動化環境が完成する。</p>
+	
+	    <blockquote style="margin-top: 40px; border-left: 4px solid var(--accent-log); padding-left: 20px; font-style: italic; color: #555;">
+	        「沈黙は金なり（Silence is golden.）」<br>
+	        正常に実行されたコマンドは、余計なポエム（お喋り）を返さず、ただ次のフィルターへと静かに結果を射出する。
+	        婚活（Log #053）も研究も同じだ。無駄なハンドシェイクを省き、90% の解（Look for the 90 percent solution.）を最速でデプロイすることこそが、宇宙の寿命（Log #058）という絶対的な制約の中で生きる我々の最適解なのだ。<br>
+	        運命の <code>UNIX Philosophy</code> は、今、混沌とした私の思考のランタイムを初期化（Reset）し、究極の「シンプル」という名のパッチを適用した。
+	    </blockquote>
+	
+	    <p style="font-weight: bold; text-align: right; color: var(--accent-log); margin-top: 30px; font-size: 1.1rem;">
+	        "Go West!" ―― 運命の UNIX 哲学は、今、私の指先に「侵しがたい安全の真理」をデプロイした。
+	    </p>
+	</article>
+</main>
+
+<footer style="padding: 60px 0; text-align: center; color: #b2bec3; font-size: 0.9rem;">
+    &copy; 2026 Kazuya Sakai. Decrypting the future with AArch64.
+</footer>
+
+</body>
+</html>
